@@ -19,22 +19,21 @@ const createGameState = chatId => {
 }
 const getGreetMessage = isGroup =>
 	trueTrim(`
-	👋 Salam. Mən qrup çatlarında "yaşı təxmin et" oynamaq üçün bir robotam
+	*👋 Salam. Mən @BanditosQrup'u üçün yaranmış, Yaş Təxmin Oyun Botuyam.🤖*
 
-	📋 Qaydalar: Mən sizə həmin şəxsin şəklini atıram, sizin vəzifəniz onun yaşını təxmin etməkdir.  Nə qədər dəqiq cavab versəniz, bir o qədər az xal itirəcəksiniz.
+	📋 Qaydalar: Mən sizə bir şəxsin şəklini atıram və sizin vəzifəniz onun yaşını təxmin etməkdir.  Nə qədər dəqiq cavab versəniz, bir o qədər az xal qazanırsınız.
 	
-	ℹ *Qurulum*
-	${isGroup ? "" : "\n😉 Məndən Heçbir Adminlik İcazələri Olmadan İstifadə Edə Bilərsiniz .\n"}
+	ℹ *DİQQƏT*
+	${isGroup ? "" : "\n🗽 Məndən Heçbir Adminlik İcazələri Olmadan İstifadə Edə Bilərsiniz. Lakin Medya açığ olması mütləqdir.\n"}
 	
 	*📝 Əmrlər*
 	/game - 🕹 Oyunu Başlat
 	/stop - 🛑 Oyunu Dayandır
 	/top - 🔝 Qrup Oyunçu Xalları
 	/chart - 🌎 Qlobal Reyting
-	/botlist - 📌 Hazır deyil
 	
-	🧑‍💻 Qurucu: @Vusaliww 🇦🇿
-✅Rəsmi Kanallar: @cGuesMasterResmi, @VusalinBlogu 🤍
+	🧑‍💻Owner: @HusuSovetski
+🇦🇿 Botun Rəsmi Qrupu: @BanditosQrup
 `)
 const getRandomPerson = () => {
 	let imagePath = "./photos"
@@ -106,7 +105,7 @@ const stopGame = (ctx, chatId) => {
 						.map((member, index) => `${["🏆", "🎖", "🏅"][index] || "🔸"} ${index + 1}. ${bold(member.firstName)}: ${numberWithSpaces(member.score)} ${pluralize(member.score, "⚡xal", "⚡xal", "⚡xal")}`)
 						.join("\n")}
 
-					❤️ Botun Rəsmi Kanalına Abunə Olmağı Unutmayaq. @cGuesMasterResmi
+					❤️ Botun Rəsmi Qrupuna qatılmağı Unutmayaq. @BanditosQrup
 					🔄 /game - Bir daha?
 				`)
 			)
@@ -115,7 +114,7 @@ const stopGame = (ctx, chatId) => {
 				trueTrim(`
 					*🏁 Oyun Oynamadığınız Üçün Qalib Yoxdur. .*
 
-					❤️ Botun Rəsmi Kanalına Abunə Olmağı Unutmayaq. @cGuesMasterResmi
+					❤️ Botun Rəsmi Qrupuna qatılmağı Unutmayaq. @BanditosQrup
 					🔄 /game - Bir daha?
 				`)
 			)
@@ -141,10 +140,10 @@ const getRoundMessage = (chatId, round, time) => {
 	return trueTrim(`
 		*❕ Raund  ${round + 1}/${config.rounds}*
 		
-📌 Şəkil Dəki Şəxsin Yaşını Tapmın.
+📌 Şəkil Dəki Şəxsin Yaşını Tapın.
 ⏱️ Vaxt 20 Saniyyə
 
-✅Rəsmi Kanallara Abone Olaq: @cGuesMasterResmi, @VusalinBlogu 🤍
+🗽Rəsmi Qrup: @BanditosQrup
 
 		${answers.length > 0 ? `\n${answers.map((member, index) => `${index + 1}. *${member.firstName}*: ${member.answer}`).join("\n")}\n` : ""}
 		${"⬛".repeat(time)}${"⬜".repeat(config.timerSteps - time)}
@@ -261,7 +260,7 @@ bot.command("game", ctx => {
 		} else {
 			createChat(chatId)
 		}
-		ctx.replyWithMarkdown("*🥰 Təxmin Oyunu Başlayır Hər Birinizə Uğurlar. 🥰*")
+		ctx.replyWithMarkdown("*💎 Təxmin Oyunu Başlayır Hər Birinizə Uğurlar. 💎*")
 		startGame(ctx, chatId)
 	} else {
 		ctx.reply("🆘 Bu Əmr Qruplar Üçün Təyin Olunub 🆘")
@@ -315,7 +314,7 @@ bot.command("top", ctx => {
 						.map((member, index) => `${["🏆", "🎖", "🏅"][index] || "🔸"} ${index + 1}. ${bold(member.firstName)}: ${numberWithSpaces(member.score)} ${pluralize(member.score, "⚡xal", "⚡xal", "⚡xal")}`)
 						.join("\n")}
 
-					❤️ Botun Rəsmi Kanalına Abunə Olmağı Unutmayaq.  @cGuesMasterResmi
+					❤️ Botun Rəsmi Qrupuna qatılmağı Unutmayaq.  @BanditosQrup
 					🔄 /game - Bir daha?
 				`)
 				)
@@ -373,11 +372,11 @@ bot.command("chart", ctx => {
 			trueTrim(`
 			*🌎 Qlobal Oyunçuların Reytingi.:*
 			
-			*🏜 Yay Sezonu Başladı. ⚡*
+			*⚜️ Hamınıza uğurlar. ⚡*
 
 			${topSlice.map((member, index) => `${["🏆", "🎖", "🏅"][index] || "🔸"} ${index + 1}. ${fromId === member.id ? "Sənin Xal: " : ""}${bold(member.firstName)}: ${numberWithSpaces(member.score)} ${pluralize(member.score, "⚡xal", "⚡xal", "⚡xal")}`).join("\n")}
 			${currentUser ? `...\n🔸 ${currentUser.index + 1}. ${bold(currentUser.firstName)}: ${numberWithSpaces(currentUser.score)} ${pluralize(currentUser.score, "⚡xal", "⚡xal", "⚡xal")}\n` : ""}
-			❤️ Bəzən yeni sərin botların dərc olunduğu müəllif kanalı @cGuesMasterResmi
+			❤️ Botun Rəsmi Qrupuna Daxil olmağı unutmayın. @BanditosQrup
 			🔄 /game - Bir daha?
 		`)
 		)
